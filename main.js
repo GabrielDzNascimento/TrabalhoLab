@@ -1,3 +1,4 @@
+
 const caminhão = ['ONR5400','230','1','2','3','4','5','6','7','8'];
 const inputPlaca = document.querySelector('.placa');
 const inputKm = document.querySelector('.kmRodado');
@@ -30,4 +31,7 @@ btnPlaca.addEventListener('click',function(){
     criaTarefa(inputPlaca.value);
 });
 
-criarDivPneu();
+
+//const container = document.getElementById('meu-container');
+//onst novaDivPneu = criarDivPneu();
+//container.appendChild(novaDivPneu);
