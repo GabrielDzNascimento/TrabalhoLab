@@ -1,3 +1,19 @@
+import sqlite3 from 'sqlite3'
+import { open } from 'sqlite';
+
+async function criarTabelaUsuarios (){
+    const db = await open({
+        filename: './banco.db',
+        driver: sqlite3.Database,
+    });
+
+    db.run(`CREATE TABLE IF NOT EXISTS caminhões (Placa TEXT PRIMARY KEY, KM INTENGER, ID1 TEXT, ID2 TEXT, ID3 TEXT, ID4 TEXT, ID5 TEXT, ID6 TEXT, ID7 TEXT, ID8 TEXT)`
+
+    );
+    
+}
+
+criarTabelaUsuarios();
 
 const caminhão = ['ONR5400','230','1','2','3','4','5','6','7','8'];
 const inputPlaca = document.querySelector('.placa');
@@ -32,6 +48,6 @@ btnPlaca.addEventListener('click',function(){
 });
 
 
-//const container = document.getElementById('meu-container');
-//onst novaDivPneu = criarDivPneu();
-//container.appendChild(novaDivPneu);
+const container = document.getElementById('meu-container');
+const novaDivPneu = criarDivPneu();
+container.appendChild(novaDivPneu);
