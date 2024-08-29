@@ -3,7 +3,7 @@ import { open } from 'sqlite';
 
 async function criarTabelaUsuarios (){
     const db = await open({
-        filename: './banco.db',
+        filename: './trabalho/banco.db',
         driver: sqlite3.Database,
     });
 
@@ -14,6 +14,33 @@ async function criarTabelaUsuarios (){
 }
 
 criarTabelaUsuarios();
+
+
+async function buscarPlacaEExibir(placaCarro) {
+    const db = await open({
+        filename: './trabalho/banco.db',
+        driver: sqlite3.Database,
+    });
+
+    db.get('SELECT Placa FROM caminhões WHERE id = ?', [placaCarro], (err, row) => {
+        if (err) {
+            console.error(err.message);
+            return;
+        }
+
+        if (row) {
+            const elementoPlaca = document.getElementById('placa');
+            elementoPlaca.textContent = row.placa;
+        } else {
+            console.log('Placa não encontrada.');
+        }
+    });
+
+    db.close();
+}
+
+
+buscarPlacaEExibir('ONR5400'); 
 
 const caminhão = ['ONR5400','230','1','2','3','4','5','6','7','8'];
 const inputPlaca = document.querySelector('.placa');
