@@ -1,17 +1,26 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const ejs = require('ejs');
+const path = require('path');
 
 const app = express();
 const port = 8081;
 
-// Configuração do EJS
+
+
 app.set('view engine', 'ejs');
 
-// Conexão com o banco de dados
+app.use(express.static(path.join(__dirname, 'public'), {
+  setHeaders: (res, path) => {
+      if (path.endsWith('.css')) {
+          res.set('Content-Type', 'text/css');
+      }
+  }
+}));
+
+
 const db = new sqlite3.Database('banco.db');
 
-// Rota para a página inicial
 app.get('/', (req, res) => {
   db.all('SELECT * FROM caminhões', (err, rows) => {
     if (err) {
